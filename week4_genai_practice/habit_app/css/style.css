@@ -1,0 +1,392 @@
+:root {
+  color-scheme: light;
+  --bg: #fff7f9;
+  --card: #fffdfd;
+  --ink: #4e3b45;
+  --muted: #8b6f78;
+  --accent: #f2b4c0;
+  --accent-soft: #fff1f5;
+  --accent-2: #8fd2c1;
+  --done: #7fc6b3;
+  --danger: #d96f7a;
+  --shadow: 0 16px 40px rgba(210, 155, 173, 0.2);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Pretendard", "Apple SD Gothic Neo", "Segoe UI", sans-serif;
+  background: linear-gradient(135deg, #f8f0eb 0%, #eef8f6 100%);
+  color: var(--ink);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.app-shell {
+  width: min(100%, 520px);
+  background: var(--card);
+  border-radius: 28px;
+  box-shadow: var(--shadow);
+  padding: 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.streak-badge {
+  margin-top: 6px;
+  padding: 8px 10px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--accent-soft), rgba(143, 210, 193, 0.18));
+  color: #8a5e6d;
+  font-size: 0.9rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.eyebrow {
+  margin: 0 0 5px;
+  font-size: 0.8rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+h1 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.date-text {
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.progress-card,
+.add-habit-card,
+.habit-list-card {
+  background: var(--card);
+  border: 1px solid #f1e7e1;
+  border-radius: 20px;
+  padding: 18px;
+  margin-bottom: 16px;
+}
+
+.progress-card {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 16px;
+  align-items: center;
+}
+
+.progress-ring {
+  --progress: 0%;
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  background: conic-gradient(var(--accent) var(--progress), var(--accent-soft) 0);
+  display: grid;
+  place-items: center;
+  margin: 0 auto;
+}
+
+.progress-inner {
+  width: 78px;
+  height: 78px;
+  border-radius: 50%;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-weight: 700;
+}
+
+.progress-inner span {
+  font-size: 1.1rem;
+}
+
+.progress-inner small {
+  color: var(--muted);
+  font-size: 0.72rem;
+  margin-top: 4px;
+}
+
+.meta-label {
+  margin: 0 0 6px;
+  color: var(--muted);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.progress-meta h2 {
+  margin: 0 0 6px;
+  font-size: 1.2rem;
+}
+
+.meta-sub {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+  line-height: 1.4;
+}
+
+#habit-form {
+  display: flex;
+  gap: 8px;
+}
+
+#habit-input {
+  flex: 1;
+  border: 1px solid #e6d8cf;
+  border-radius: 12px;
+  padding: 12px 14px;
+  font-size: 0.95rem;
+  outline: none;
+  background: #fffdfa;
+}
+
+#habit-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(116, 200, 182, 0.18);
+}
+
+button {
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+#habit-form button {
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: white;
+  border-radius: 12px;
+  padding: 0 14px;
+}
+
+.form-message {
+  min-height: 1.2rem;
+  margin: 8px 2px 0;
+  font-size: 0.86rem;
+  color: var(--accent);
+}
+
+.form-message.error {
+  color: var(--danger);
+}
+
+.celebration {
+  display: none;
+  margin: 0 0 12px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(116, 200, 182, 0.18), rgba(244, 198, 209, 0.24));
+  color: #4a6a62;
+  text-align: center;
+  font-weight: 700;
+  animation: popIn 0.35s ease;
+}
+
+.celebration.show {
+  display: block;
+}
+
+.confetti-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.confetti-piece {
+  position: absolute;
+  width: 8px;
+  height: 14px;
+  border-radius: 999px;
+  opacity: 0;
+  animation: confettiFall 1.2s ease-out forwards;
+}
+
+.list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.list-header h3 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.list-header span {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+#habit-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.habit-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: #fcf9f6;
+  border: 1px solid #eee0d7;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+}
+
+.habit-item:hover {
+  transform: translateY(-1px);
+}
+
+.habit-item.completed {
+  background: #f3fcf7;
+  border-color: #cfeadf;
+  box-shadow: inset 0 0 0 1px rgba(97, 184, 145, 0.16);
+}
+
+.habit-item.just-completed {
+  animation: cardPop 0.35s ease;
+}
+
+.habit-main {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+}
+
+.check-toggle {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid #d7c1b6;
+  background: white;
+  display: grid;
+  place-items: center;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.check-toggle::after {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: transparent;
+  transition: background 0.2s ease;
+}
+
+.habit-item.completed .check-toggle {
+  background: var(--done);
+  border-color: var(--done);
+}
+
+.habit-item.completed .check-toggle::after {
+  background: white;
+}
+
+.habit-item.completed .habit-text {
+  text-decoration: line-through;
+  color: #5a7b6c;
+}
+
+.habit-text {
+  font-size: 0.96rem;
+}
+
+.delete-btn {
+  background: transparent;
+  color: var(--danger);
+  padding: 6px 8px;
+  border-radius: 10px;
+}
+
+.delete-btn:hover {
+  background: #fff0f5;
+}
+
+@keyframes cardPop {
+  0% {
+    transform: scale(0.98);
+  }
+  60% {
+    transform: scale(1.03);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes confettiFall {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, -10px, 0) rotate(0deg);
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(var(--x), 180px, 0) rotate(720deg);
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    padding: 12px;
+  }
+
+  .app-shell {
+    padding: 18px;
+    border-radius: 20px;
+  }
+
+  .progress-card {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  #habit-form {
+    flex-direction: column;
+  }
+
+  #habit-form button {
+    padding: 12px;
+  }
+}
