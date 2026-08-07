@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>뽀모고치</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="hero">
+        <h1 class="title">뽀모고치</h1>
+        <p class="subtitle">작은 공부방에서 펫과 함께 집중해요.</p>
+      </header>
+
+      <main class="game-layout">
+        <section class="room-panel" aria-label="공부방">
+          <div class="room-frame" id="roomFrame">
+            <div class="room-hud">
+              <div class="hud-left">
+                <div class="level-gauge">
+                  <span class="level-label">Lv</span>
+                  <strong id="levelDisplayTop">1</strong>
+                </div>
+                <div class="exp-gauge">
+                  <div class="exp-fill" id="expFillTop"></div>
+                </div>
+              </div>
+              <div class="hud-right">
+                <div class="gems">💎 <span id="gemsDisplay">0</span></div>
+              </div>
+            </div>
+            <div class="room-wall"></div>
+            <div class="room-floor"></div>
+            <div class="window"></div>
+            <div class="desk"></div>
+            <div class="chair"></div>
+            <div class="bookshelf">
+              <div class="bookshelf-shelf shelf1"></div>
+              <div class="bookshelf-shelf shelf2"></div>
+            </div>
+            <div class="plant"></div>
+            <div class="rug"></div>
+            <div class="clock"></div>
+            <div class="pet-stage" id="petStage" aria-hidden="false"></div>
+            <div class="sparkle sparkle-one" aria-hidden="true">✦</div>
+            <div class="sparkle sparkle-two" aria-hidden="true">✦</div>
+            <div class="sparkle sparkle-three" aria-hidden="true">❤</div>
+          </div>
+
+          <div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
+        </section>
+        <aside class="info-panel">
+          <nav class="menu-tabs" role="tablist">
+            <button class="tab-button active" data-tab="main" role="tab" aria-selected="true">메인</button>
+            <button class="tab-button" data-tab="pets" role="tab" aria-selected="false">펫</button>
+            <button class="tab-button" data-tab="info" role="tab" aria-selected="false">정보</button>
+          </nav>
+          <div class="tab-panels">
+            <div class="tab-panel" id="tab-main">
+          <section class="panel-card name-card">
+            <h2 class="panel-title">펫 이름</h2>
+            <div class="name-view">
+              <p id="petNameDisplay" class="pet-name-display">나의 펫</p>
+              <p class="helper-text">이름을 바꾸면 성장 기록은 그대로 남아요.</p>
+              <div class="button-row">
+                <button id="changeNameButton" type="button" class="secondary">펫 이름 바꾸기</button>
+              </div>
+            </div>
+          </div>
+            <div class="tab-panel hidden" id="tab-pets">
+              <section class="panel-card pet-select-card">
+                <h2 class="panel-title">펫 선택</h2>
+                <div id="petList" class="pet-list"></div>
+              </section>
+            </div>
+
+            <div class="tab-panel hidden" id="tab-info">
+              <section class="panel-card mode-card">
+            <h2 class="panel-title">공부 모드</h2>
+            <div class="mode-buttons" role="group" aria-label="공부 모드 선택">
+              <button class="mode-button active" data-mode="study" type="button" aria-pressed="true">25분 공부 모드</button>
+              <button class="mode-button" data-mode="test" type="button" aria-pressed="false">10초 테스트 모드</button>
+            </div>
+            <p id="modeHint" class="helper-text">실제 공부는 25분으로 기록돼요.</p>
+              </section>
+
+              <section class="panel-card timer-card">
+            <h2 class="panel-title">타이머</h2>
+            <div id="timerDisplay" class="timer-display" aria-live="polite">25:00</div>
+            <div class="button-row timer-controls">
+              <button id="startButton" type="button">공부 시작</button>
+              <button id="pauseButton" type="button" class="secondary">일시정지</button>
+              <button id="resumeButton" type="button" class="secondary hidden">이어하기</button>
+              <button id="resetButton" type="button" class="danger">타이머 초기화</button>
+            </div>
+              </section>
+
+              <section class="panel-card progress-card">
+            <h2 class="panel-title">펫 성장</h2>
+            <div class="level-line">
+              <span>레벨</span>
+              <strong id="levelDisplay">1</strong>
+            </div>
+            <div class="exp-box">
+              <div class="exp-bar" aria-hidden="true">
+                <div id="expFill" class="exp-fill"></div>
+              </div>
+              <div class="exp-text">
+                경험치 <span id="expDisplay">0</span> / <span id="expGoalDisplay">100</span>
+              </div>
+            </div>
+            <p id="growthMessage" class="helper-text">새로운 공부를 시작해요.</p>
+              </section>
+
+              <section class="panel-card stat-card">
+            <h2 class="panel-title">기록</h2>
+            <ul class="stat-grid">
+              <li><span>실제 공부</span><strong id="studyCountDisplay">0회</strong></li>
+              <li><span>테스트 완료</span><strong id="testCountDisplay">0회</strong></li>
+              <li><span>누적 집중</span><strong id="focusTimeDisplay">0분</strong></li>
+            </ul>
+              </section>
+
+              <section class="panel-card control-card">
+            <h2 class="panel-title">데이터 관리</h2>
+            <div class="button-row button-stack">
+              <button id="clearProgressButton" type="button" class="secondary">성장 기록 지우기</button>
+              <button id="clearAllButton" type="button" class="danger">게임 데이터 모두 지우기</button>
+            </div>
+              </section>
+
+              <section class="panel-card guide-card">
+            <h2 class="panel-title">사용 방법</h2>
+            <ul class="guide-list">
+              <li>펫 이름을 먼저 정하고 시작해요.</li>
+              <li>25분 공부 모드로 진짜 집중하고, 테스트 모드로 체크해요.</li>
+              <li>완료하면 경험치와 레벨이 올라가요.</li>
+            </ul>
+              </section>
+            </div>
+          </div>
+        </aside>
+      </main>
+    </div>
+
+    <div id="nameOverlay" class="name-overlay" role="dialog" aria-modal="true" aria-labelledby="nameOverlayTitle">
+      <div class="name-modal">
+        <h2 id="nameOverlayTitle">함께 공부할 펫의 이름을 정해주세요!</h2>
+        <label for="petNameInput">펫 이름</label>
+        <input id="petNameInput" name="petName" type="text" maxlength="10" placeholder="예: 루루" autocomplete="off" />
+        <div class="name-actions">
+          <button id="startNameButton" type="button">이 이름으로 시작하기</button>
+          <button id="cancelNameButton" type="button" class="secondary">취소</button>
+        </div>
+        <p id="nameError" class="error-message" role="alert"></p>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
