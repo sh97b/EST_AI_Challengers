@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>오늘의 습관</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="top-bar">
+        <div>
+          <p class="eyebrow">오늘의 습관</p>
+          <h1 id="greeting">좋은 하루 시작해요</h1>
+          <p id="today-date" class="date-text">2026년 8월 7일</p>
+        </div>
+        <div id="streak-badge" class="streak-badge">🔥 연속 0일째</div>
+      </header>
+
+      <section class="progress-card">
+        <div class="ring-wrap">
+          <div id="progress-ring" class="progress-ring">
+            <div class="progress-inner">
+              <span id="progress-percent">0%</span>
+              <small>달성률</small>
+            </div>
+          </div>
+        </div>
+        <div class="progress-meta">
+          <p class="meta-label">오늘의 목표</p>
+          <h2 id="progress-summary">0 / 0 완료</h2>
+          <p class="meta-sub">작은 습관 하나가 큰 변화를 만듭니다.</p>
+        </div>
+      </section>
+
+      <section class="add-habit-card">
+        <form id="habit-form">
+          <input
+            id="habit-input"
+            type="text"
+            maxlength="40"
+            placeholder="새 습관을 입력하세요"
+            autocomplete="off"
+          />
+          <button type="submit">추가</button>
+        </form>
+        <p id="form-message" class="form-message" role="alert"></p>
+      </section>
+
+      <div id="celebration" class="celebration" aria-live="polite">
+        <p>🎉 모두 완료했어요! 오늘도 멋져요!</p>
+      </div>
+      <div id="confetti-layer" class="confetti-layer" aria-hidden="true"></div>
+
+      <section class="habit-list-card">
+        <div class="list-header">
+          <h3>오늘의 습관</h3>
+          <span id="habit-count">0개</span>
+        </div>
+        <ul id="habit-list"></ul>
+      </section>
+    </div>
+
+    <script src="js/app.js"></script>
+  </body>
+</html>
