@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI 부트캠프 복습 퀴즈</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="quiz-container">
+    <div class="terminal-shell">
+      <div class="terminal-header">
+        <div class="terminal-dots" aria-hidden="true">
+          <span></span><span></span><span></span>
+        </div>
+        <div class="terminal-title">C:\AI_BOOTCAMP\REVIEW></div>
+      </div>
+      <div class="terminal-screen">
+        <p class="terminal-subtitle">[BOOTING RETRO QUIZ SYSTEM]</p>
+        <h1>AI 부트캠프 복습 퀴즈</h1>
+        <section id="quiz-box" class="card">
+          <div id="status" class="status"></div>
+          <div id="question-box" class="question-box">
+            <div id="question-number" class="question-number"></div>
+            <div id="question-text" class="question-text"></div>
+          </div>
+          <div id="choices" class="choices"></div>
+          <div id="feedback" class="feedback"></div>
+          <button id="next-button" class="next-button" type="button">다음 문제</button>
+        </section>
+        <section id="result-box" class="card hidden">
+          <h2>퀴즈 완료!</h2>
+          <p id="result-summary" class="result-summary"></p>
+          <button id="restart-button" class="restart-button" type="button">다시 풀기</button>
+        </section>
+      </div>
+    </div>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
